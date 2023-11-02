@@ -27,7 +27,7 @@ services:
       - RUN_MIGRATIONS=True
       - PGHOST=host.docker.internal
       - PGPORT=5432
-      - PGDATABASE=postgres
+      - PGDATABASE=${DB_NAME}
       - PGUSER=${DB_USER}
       - PGPASSWORD=${DB_PASSWORD}
       - FLYWAY_LOCATIONS=filesystem:/migrations/common,filesystem:/migrations/local
