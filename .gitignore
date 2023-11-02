@@ -1,2 +1,8 @@
 # Local enviroments
 .env
+
+# Local terraform
+iac/.terraform.lock.hcl
+iac/.terraform/
+iac/terraform.tfstate
+iac/terraform.tfstate.backup
