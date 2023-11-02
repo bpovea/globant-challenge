@@ -1,0 +1,4 @@
+[sqlfluff]
+verbose = 1
+dialect = postgres
+ignore = lexing,parsing
