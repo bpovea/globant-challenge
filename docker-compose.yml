@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  local-stack:
+    image: localstack/localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3
+      # - DEBUG=1 # (optional)
+
+  challenge-db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+  challenge-migration:
+    image: flyway/flyway:8.5.12
+    volumes:
+    - ./migrations/conf:/flyway/conf
+    - ./migrations:/migrations
+    environment:
+      - RUN_MIGRATIONS=True
+      - PGHOST=host.docker.internal
+      - PGPORT=5432
+      - PGDATABASE=postgres
+      - PGUSER=${DB_USER}
+      - PGPASSWORD=${DB_PASSWORD}
+      - FLYWAY_LOCATIONS=filesystem:/migrations/common,filesystem:/migrations/local
+      - FLYWAY_OUT_OF_ORDER=false
+    depends_on:
+      - challenge-db
+    command: -connectRetries=5 migrate
+
