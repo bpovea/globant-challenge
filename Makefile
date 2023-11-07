@@ -13,6 +13,7 @@ start: .env
 	sleep 5
 	make migrate
 	make terraform
+	make copy-initial-data
 
 down:
 	make stop-dependencies
@@ -27,10 +28,11 @@ migrate: .env
 	docker-compose run challenge-migration
 
 clean: .env
-	docker-compose rm -f -v -s local-stack challenge-db
-	docker-compose up --force-recreate -d local-stack challenge-db
-	make migrate
-	make terraform
+	make delete
+	make start
 
 delete:
-	docker container rm $(docker container list -a | awk '/Exit/{ print $1 }')
+	docker-compose rm -f -v -s local-stack challenge-db challenge-migration
+
+copy-initial-data:
+	aws s3 cp ./data s3://globant-challenge/data/ --recursive --endpoint-url http://localhost:4566
