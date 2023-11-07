@@ -14,6 +14,7 @@ start: .env
 	make migrate
 	make terraform
 	make copy-initial-data
+	make start-flask
 
 down:
 	make stop-dependencies
@@ -36,3 +37,17 @@ delete:
 
 copy-initial-data:
 	aws s3 cp ./data s3://globant-challenge/data/ --recursive --endpoint-url http://localhost:4566
+
+start-flask:
+	flask --app src/run.py run --debug
+
+run-section-1:
+	curl --location 'http://127.0.0.1:5000/populate_data' \
+	--header 'Content-Type: application/json' \
+	--data '{ \
+		"chunk_size": 1000, \
+		"delimiter": ",", \
+		"jobs_file_path": "s3://globant-challenge/data/jobs.csv", \
+		"departments_file_path": "s3://globant-challenge/data/departments.csv", \
+		"employees_file_path": "s3://globant-challenge/data/hired_employees.csv" \
+	}'
