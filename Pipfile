@@ -4,8 +4,17 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+flask-sqlalchemy = "*"
+flask = "*"
+flask-restful = "*"
+psycopg2-binary = "*"
+boto3 = "*"
+smart-open = "*"
+pandas = "*"
+python-dotenv = "*"
 
 [dev-packages]
+ipdb = "*"
 
 [requires]
 python_version = "3.9"

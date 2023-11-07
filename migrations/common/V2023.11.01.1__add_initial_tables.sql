@@ -5,18 +5,19 @@
 set schema 'challenge_data';
 
 CREATE TABLE challenge_data.departments (
-    id serial PRIMARY KEY,
-    departament VARCHAR(100)
+    id INTEGER PRIMARY KEY,
+    department VARCHAR(100)
 );
 
 CREATE TABLE challenge_data.jobs (
-    id serial PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     job VARCHAR(100)
 );
 
 CREATE TABLE challenge_data.employees (
-    id serial PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     name VARCHAR(100),
+    hire_datetime TIMESTAMPTZ,
     department_id integer REFERENCES departments(id),
     job_id integer REFERENCES jobs(id)
 );
