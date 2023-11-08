@@ -12,6 +12,8 @@ boto3 = "*"
 smart-open = "*"
 pandas = "*"
 python-dotenv = "*"
+fsspec = "*"
+s3fs = "*"
 
 [dev-packages]
 ipdb = "*"

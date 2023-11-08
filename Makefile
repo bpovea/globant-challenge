@@ -51,3 +51,12 @@ run-section-1:
 		"departments_file_path": "s3://globant-challenge/data/departments.csv", \
 		"employees_file_path": "s3://globant-challenge/data/hired_employees.csv" \
 	}'
+
+run-section-2-1:
+	curl --location --request GET 'http://127.0.0.1:5000//reports/employees_hired_by_job' \
+	--header 'Content-Type: application/json' \
+	--data '{ \
+		"chunk_size": 1000, \
+		"output_path": "s3://globant-challenge/output/employees_hired_by_job.csv" \
+	}'
+	aws s3 cp s3://globant-challenge/output/employees_hired_by_job.csv ./ --endpoint-url http://localhost:4566
