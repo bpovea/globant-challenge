@@ -26,7 +26,7 @@ kill:
 	make stop-dependencies
 
 migrate: .env
-	docker-compose run challenge-migration
+	docker-compose up challenge-migration
 
 clean: .env
 	make delete
