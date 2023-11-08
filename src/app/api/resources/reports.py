@@ -41,7 +41,7 @@ class EmployeesHiredByJob(Resource):
             df_pivoted = chunked_df.pivot(
                 index=["department", "job"], columns="quarter", values="employee_count"
             ).reset_index()
-            df_pivoted.columns = ["Department", "Job", "", "Q1", "Q2", "Q3", "Q4"]
+            df_pivoted.columns = ["Department", "Job", "Q1", "Q2", "Q3", "Q4"]
 
             # ensure first time open in write mode (replace file if exist) and header True
             if record_count == 0:

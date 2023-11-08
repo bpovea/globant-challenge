@@ -6,3 +6,7 @@ iac/.terraform.lock.hcl
 iac/.terraform/
 iac/terraform.tfstate
 iac/terraform.tfstate.backup
+
+# test files
+employees_hired_by_department.csv
+employees_hired_by_job.csv
