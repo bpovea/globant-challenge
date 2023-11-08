@@ -21,3 +21,4 @@ api.add_resource(EmployeeResource, "/employees/<int:employee_id>")
 
 api.add_resource(PopulateDataResource, "/populate_data")
 api.add_resource(EmployeesHiredByJob, "/reports/employees_hired_by_job")
+api.add_resource(EmployeesHiredByDepartment, "/reports/employees_hired_by_department")

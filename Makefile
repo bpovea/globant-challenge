@@ -61,3 +61,13 @@ run-section-2-1:
 		"year": 2021 \
 	}'
 	aws s3 cp s3://globant-challenge/output/employees_hired_by_job.csv ./ --endpoint-url http://localhost:4566
+
+run-section-2-2:
+	curl --location --request GET 'http://127.0.0.1:5000//reports/employees_hired_by_department' \
+	--header 'Content-Type: application/json' \
+	--data '{ \
+		"chunk_size": 1000, \
+		"output_path": "s3://globant-challenge/output/employees_hired_by_department.csv", \
+		"year": 2021 \
+	}'
+	aws s3 cp s3://globant-challenge/output/employees_hired_by_department.csv ./ --endpoint-url http://localhost:4566
