@@ -12,9 +12,10 @@ class EmployeesHiredByJob(Resource):
         data = request.get_json()
         output_path = data["output_path"]
         chunksize = data["chunk_size"]
+        year = data["year"]
         sql_engine = db.get_engine()
         conn = sql_engine.connect()
-        run_query = """
+        run_query = f"""
             SELECT
                 d.department  AS department,
                 j.job AS job,
@@ -26,6 +27,8 @@ class EmployeesHiredByJob(Resource):
                 challenge_data.departments AS d ON e.department_id = d.id
             JOIN
                 challenge_data.jobs AS j ON e.job_id = j.id
+            WHERE
+                EXTRACT(year FROM e.hire_datetime) = {year}
             GROUP BY
                 d.department, j.job, EXTRACT(quarter FROM e.hire_datetime)
             ORDER BY

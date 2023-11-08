@@ -57,6 +57,7 @@ run-section-2-1:
 	--header 'Content-Type: application/json' \
 	--data '{ \
 		"chunk_size": 1000, \
-		"output_path": "s3://globant-challenge/output/employees_hired_by_job.csv" \
+		"output_path": "s3://globant-challenge/output/employees_hired_by_job.csv", \
+		"year": 2021 \
 	}'
 	aws s3 cp s3://globant-challenge/output/employees_hired_by_job.csv ./ --endpoint-url http://localhost:4566
