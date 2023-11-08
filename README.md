@@ -1,25 +1,28 @@
-# Globant's Data Engineer challenge
+# Globant's Data Engineer Challenge
 
+This is a public repository that contains Globant's Data Engineering Challenge. It consists of the initial setup for a RESTful API service for loading and reporting structured employee data.
 
-This is a public repo that contains Globant's Data Engineering Challenge. It consists of the initial setup for a RESTful API service for loading and reporting structured employee data.
+This project uses a variety of technologies and utilities that can be used for learning purposes, such as:
 
-This project uses a bunch of technologies and utilities that could be used for  learning proposes, such as:
- - Docker
- - LocalStack (Mock AWS)
- - Postgres
- - Flyway migrations
- - Python - Flask API
- - Makefile
- - Pytests
- - Code Linters (Black - sqlfluff)
- - Terraform
+- Docker
+- LocalStack (Mock AWS)
+- Postgres
+- Flyway migrations
+- Python - Flask API
+- Makefile
+- Pytests [TODO]
+- Code Linters (Black - sqlfluff)
+- Terraform
 
 ## Requirements
+
 - Docker
 - Pipenv
-- Python3.9
+- Python 3.9
+- Terraform
 
 ## Build Configuration
+
 ### Install the project dependencies:
 
 ```bash
@@ -37,3 +40,26 @@ The project uses the formatter and linter black. In order to run this before com
 ```bash
 make git-hooks
 ```
+
+## Run the project
+### Make commands
+
+Here is a brief explanation of the available make commands (be sure you are in the pipenv environment before running make commands):
+- `make start`:
+    - copy the .env.example file to .env file in case it doesn't exist.
+    - start the local-stack container that will mock the AWS S3 service.
+    - start the challenge-db which is a Postgres DB for storing the employee data.
+    - Run the flyway migrations to create the initial schemas and tables.
+    - Run Terraform code for creating an s3 bucket for development proposes.
+    - Copy the ./data files to the s3 bucket using an AWS cli command.
+    - Start the flask API service and keep it in the active console.
+- `make run-section-1`: This command uses curl to create a request for populating the data in the database.
+- `make run-section-2-1`:
+    - This command uses curl to create a request that generates a report with the 2021 summary data for the hired employees by quarter, department and job.
+    - Download the data from the output path in the local directory.
+- `make run-section-2-2`:
+    - This command uses curl to create a request that generates a report with the 2021 summary data for the hired employees by department.
+    - Download the data from the output path in the local directory.
+- `make clean`:
+    - Delete local-stack challenge-db challenge-migration containers.
+    - Run the `make start` command.
